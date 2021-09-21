@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    environment {
+       GIT_SSL_NO_VERIFY=true                                
+    }
     tools {
         maven 'M3_8_2'
     }
