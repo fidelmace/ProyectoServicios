@@ -47,7 +47,7 @@ pipeline {
         }
         stage('Container Run') {
             steps {
-                //sh 'docker stop microservicio-one'
+                sh 'docker stop microservicio-one || true'  // valida que el microservicio-one exista  y No truene cuando no exista
                 sh 'docker run -d --rm --name microservicio-one -p 8090:8090 microservicio-service'
             }
         }
