@@ -1,8 +1,10 @@
 pipeline {
     agent any
-//    environment {
-//       GIT_SSL_NO_VERIFY=true                                
-//    }
+    environment {
+       GIT_SSL_NO_VERIFY=true
+       LOCAL_SERVER= '192.168.100.116'
+//       MODE = 'dev'
+    }
     tools {
         maven 'M3_8_2'
     }
@@ -45,10 +47,22 @@ pipeline {
                 }
             }
         }
+        stage('Container Push Nexus') {
+            steps {
+                    withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'dockerhub_id  ', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
+                        sh 'docker login ${LOCAL_SERVER}:8083 -u $USERNAME -p $PASSWORD'
+                        sh 'docker tag microservicio-service:latest ${LOCAL_SERVER}:8083/repository/docker-private/microservicio_nexus:dev'
+
+                }
+            }
+        }
+
         stage('Container Run') {
             steps {
                 sh 'docker stop microservicio-one || true'  // valida que el microservicio-one exista  y No truene cuando no exista
-                sh 'docker run -d --rm --name microservicio-one -p 8090:8090 microservicio-service'
+                //sh 'docker run -d --rm --name microservicio-one -p 8090:8090 microservicio-service'
+                sh 'docker run -d --rm --name microservicio-one -p 8090:8090 ${LOCAL_SERVER}:8083/repository/docker-private/microservicio_nexus:dev'
+
             }
         }
     }
