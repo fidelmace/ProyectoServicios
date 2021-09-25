@@ -92,5 +92,28 @@ pipeline {
 
             }
         }
+
+        stage('Testing') {
+            steps {
+                dir('cypress/') {
+                    sh sh 'docker run --rm --name Cypress -v "c:/users/fmacedoniom/git/cursomicroservicios2021/ProyectoServicios/jenkins_home/workspace/Pruebas/cypress:/e2e" -w /e2e -e Cypress cypress/included:3.4.0'
+                }
+            }
+        }
+        stage('tar videos') 
+        {
+            steps 
+            {
+                dir('cypress/cypress/videos/') {
+                    sh 'tar -cvf videos.tar .'
+                    archiveArtifacts artifacts: 'videos.tar',
+                    allowEmptyArchive: true
+                }
+            }
+        }
+
+
+
+
     }
 }
