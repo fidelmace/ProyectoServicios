@@ -14,16 +14,16 @@ pipeline {
                 dir('microservicio-service/'){
                     echo 'Execute Maven and Analizing with SonarServer'
                     withSonarQubeEnv('SonarServer') {
-                        sh "mvn clean package dependency-check:check sonar:sonar \
+                        sh "mvn clean package"
+                        /* dependency-check:check sonar:sonar \
                             -Dsonar.projectKey=21_MyCompany_Microservice \
                             -Dsonar.projectName=21_MyCompany_Microservice \
                             -Dsonar.sources=src/main \
-                            -Dsonar.coverage.exclusions=**/*TO.java,**/*DO.java,**/curso/web/**/*,**/curso/persistence/**/*,**/curso/commons/**/*,**/curso/model/**/* \
                             -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml \
                             -Djacoco.output=tcpclient \
                             -Djacoco.address=127.0.0.1 \
                             -Djacoco.port=10001" 
-                            
+                          */  
                     }
                 }
             }
@@ -31,6 +31,7 @@ pipeline {
 // Se crea conexión para que SONAR nos avise del resultado en caso de que no pase la compilación, se tiene que indicar pasos a seguir 
 //http://192.168.100.116:9000/ local sonaque
 
+/*
         stage ('Quality Gate') {
             steps {
                 timeout(time: 2, unit: 'MINUTES') {
@@ -38,6 +39,7 @@ pipeline {
                 }
             }
         }
+*/
 
         stage('Container Build') {
             steps {
