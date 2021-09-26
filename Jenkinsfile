@@ -108,7 +108,7 @@ pipeline {
                 //    sh 'tar -cvf videos.tar .'
                 //    archiveArtifacts artifacts: 'videos.tar',
                 //    allowEmptyArchive: true
-                }
+                //}
             }
         }
 
