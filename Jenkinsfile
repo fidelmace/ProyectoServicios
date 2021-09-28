@@ -106,8 +106,8 @@ pipeline {
             steps 
             {
                 dir('cypress/cypress/videos/') {
-                    sh 'tar -cvf videos.tar .'
-                    archiveArtifacts artifacts: 'videos.tar',
+                    sh 'tar -cvf videos2.tar .'
+                    archiveArtifacts artifacts: 'videos2.tar',
                     allowEmptyArchive: true
                 }
             }
