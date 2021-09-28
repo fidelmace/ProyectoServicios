@@ -101,7 +101,7 @@ pipeline {
                 }
             }
         }
-        stage('tar videos') 
+/*        stage('tar videos') 
         {
             steps 
             {
@@ -112,7 +112,7 @@ pipeline {
                 }
             }
         }
-
+*/
 
 
 
