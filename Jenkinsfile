@@ -96,29 +96,11 @@ pipeline {
         stage('Testing') {
             steps {
                 dir('cypress/') {
-                   // sh 'docker run --rm --name Cypress -v "c:/Usuarios/fmacedoniom/git/cursomicroservicios2021/ProyectoServicios/jenkins_home/workspace/MicroservicioTruper/Cypress:/e2e" -w /e2e -e Cypress cypress/included:3.4.0'
-                    // OK sh 'docker run --rm --name Cypress -v "C:/Users/fmacedoniom/git/cursomicroservicios2021/ProyectoServicios/jenkins_home/workspace/MicroservicioTruper/Cypress:/e2e" -w /e2e -e Cypress cypress/included:3.4.0'
                     sh 'docker build -t cypressfront .'
                     sh 'docker run cypressfront'
+                    //sh 'docker run --rm --name Cypress -v /Users/javierrodriguez/Documents/Repositorios/EcosistemaJenkins/jenkins_home/workspace/Microservicio/Cypress:/e2e -w /e2e -e Cypress cypress/included:3.4.0'
                 }
             }
         }
-
-/*
-        stage('tar videos') 
-        {
-            steps 
-            {
-                dir('cypress/cypress/videos/') {
-                    sh 'tar -cvf videos.tar .'
-                    archiveArtifacts artifacts: 'videos.tar',
-                    allowEmptyArchive: true
-                }
-            }
-        }
-*/
-
-
-
     }
 }
