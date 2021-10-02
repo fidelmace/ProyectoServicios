@@ -102,5 +102,42 @@ pipeline {
                 }
             }
         }
+
+        stage('Estress') {
+            steps {
+                dir('Gatling/') {
+                    sh 'mvn gatling:test'
+                }
+            }
+            post {
+                always {
+                    gatlingArchive()
+                }
+            }
+        }
+
+
     }
+
+    //despues de todos los stages la mejor practica es eliminar todo 
+    //POST
+    post {
+        always {
+            echo 'I succeeeded POST!'
+            //deleteDir()
+        }
+        success {
+            echo 'I succeeeded!'
+        }
+        unstable {
+            echo 'I am unstable :/'
+        }
+        failure {
+            echo 'I failed :('
+        }
+        changed {
+            echo 'Things were different before...'
+        }
+    }
+
 }
