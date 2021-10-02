@@ -95,7 +95,7 @@ pipeline {
 
         stage('Testing') {
             steps {
-                dir('cypress/') {
+                dir('Cypress/') {
                     sh 'docker build -t cypressfront .'
                     sh 'docker run cypressfront'
                     //sh 'docker run --rm --name Cypress -v /Users/javierrodriguez/Documents/Repositorios/EcosistemaJenkins/jenkins_home/workspace/Microservicio/Cypress:/e2e -w /e2e -e Cypress cypress/included:3.4.0'
