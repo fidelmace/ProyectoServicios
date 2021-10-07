@@ -172,7 +172,7 @@ pipeline {
         }
 */
 
-/*
+
         stage('Estress') {
             steps {
                 dir('Gatling/') {
@@ -185,7 +185,7 @@ pipeline {
                 }
             }
         }
-*/
+
 
     }
 
