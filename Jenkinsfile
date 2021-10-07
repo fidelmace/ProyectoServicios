@@ -2,7 +2,8 @@ pipeline {
     agent any
     environment {
        GIT_SSL_NO_VERIFY=true
-       LOCAL_SERVER= '192.168.100.116'
+       //LOCAL_SERVER= '192.168.100.116'
+        LOCAL_SERVER= '10.100.100.10'
 //       MODE = 'dev'
     }
     tools {
@@ -40,6 +41,8 @@ pipeline {
             }
         }
 */
+
+/*
         stage('Frontend') {
             steps {
                 echo 'Building Frontend'
@@ -52,7 +55,7 @@ pipeline {
                 }
             }
         }
-
+*/
         stage('Database') {
             steps {
                 dir('liquibase/'){
@@ -73,6 +76,7 @@ pipeline {
                 }
             }
         }
+
 
         stage('Zuul') {
             steps {
@@ -100,7 +104,7 @@ pipeline {
                 }
             }
         }
-
+/*
         stage('Container Push Nexus') {
             steps {
                     withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'dockernexus_id', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
@@ -110,7 +114,15 @@ pipeline {
                 }
             }
         }
+*/
 
+        stage('Container Run') {
+            steps {
+                sh 'docker run -d -p 8090:8090 microservicio-service'
+            }
+        }
+
+/*
         stage('Container Run') {
             steps {
                 sh 'docker stop microservicio-one || true'  // valida que el microservicio-one exista  y No truene cuando no exista
@@ -120,7 +132,7 @@ pipeline {
 
             }
         }
-
+*/
         stage('Testing') {
             steps {
                 dir('Cypress/') {
