@@ -143,19 +143,21 @@ pipeline {
 */
 
 
-/*
+
         stage('Testing') {
             steps {
                 dir('Cypress/') {
                     //sh 'docker build -t cypressfront .'
                     //sh 'docker run cypressfront'
                     // Lo de arriba funciona en caso de l error
-                    // la linea de abajo esta ok para windows 
-                    sh 'docker run --rm --name Cypress -v "/C/Users/fmacedoniom/git/cursomicroservicios2021/ProyectoServicios/jenkins_home/workspace/MicroservicioTruper/Cypress:/e2e" -w /e2e -e Cypress cypress/included:3.4.0'
+                    // la linea de abajo esta ok para windows  y esta OK 
+                    //sh 'docker run --rm --name Cypress -v "/C/Users/fmacedoniom/git/cursomicroservicios2021/ProyectoServicios/jenkins_home/workspace/MicroservicioTruper/Cypress:/e2e" -w /e2e -e Cypress cypress/included:3.4.0'
+                    sh 'docker run --rm --name Cypress -v /vagrant_data/jenkins_home/workspace/Pruebas/cypress:/e2e -w /e2e -e Cypress cypress/included:3.4.0'
+
                 }
             }
         }
-*/
+
 
 
 /*
