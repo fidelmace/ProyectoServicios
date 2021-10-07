@@ -56,6 +56,8 @@ pipeline {
             }
         }
 */
+
+/*
         stage('Database') {
             steps {
                 dir('liquibase/'){
@@ -65,7 +67,7 @@ pipeline {
                 }
             }
         }
-
+*/
         stage('Container Build') {
             steps {
                 dir('microservicio-service/'){
