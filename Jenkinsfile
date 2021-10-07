@@ -118,11 +118,16 @@ pipeline {
         }
 */
 
-        stage('Container Run') {
+       stage('Container Run') {
             steps {
-                sh 'docker run -d -p 8090:8090 microservicio-service'
+                sh 'docker stop microservicio-one || true'  // valida que el microservicio-one exista  y No truene cuando no exista
+                sh 'docker run -d --rm --name microservicio-one -p 8090:8090 microservicio-service'
+                //sh 'docker run -d --rm --name microservicio-one -e SPRING_PROFILES_ACTIVE=qa -p 8090:8090 ${LOCAL_SERVER}:8083/repository/docker-private/microservicio_nexus:dev'
+                //sh 'docker run -d --rm --name microservicio-one -e SPRING_PROFILES_ACTIVE=dev -p 8090:8090 ${LOCAL_SERVER}:8083/repository/docker-private/microservicio_nexus:dev'
+
             }
         }
+
 
 /*
         stage('Container Run') {
