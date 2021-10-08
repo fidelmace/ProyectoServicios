@@ -42,7 +42,7 @@ pipeline {
         }
 */
 
-/*
+
         stage('Frontend') {
             steps {
                 echo 'Building Frontend'
@@ -55,7 +55,7 @@ pipeline {
                 }
             }
         }
-*/
+
 
 /* esta OK 
         stage('Database') {
