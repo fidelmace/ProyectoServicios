@@ -49,6 +49,7 @@ pipeline {
                 dir('frontend/'){
                     sh 'npm install'
                     sh 'npm run build'
+                    sh 'npm config ls'
                     sh 'docker stop frontend-one || true'
                     sh "docker build -t frontend-web ."
                     sh 'docker run -d --rm --name frontend-one -p 8010:80 frontend-web'
