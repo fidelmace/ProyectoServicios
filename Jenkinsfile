@@ -2,8 +2,8 @@ pipeline {
     agent any
     environment {
        GIT_SSL_NO_VERIFY=true
-       //LOCAL_SERVER= '192.168.100.116'
-        LOCAL_SERVER= '10.100.100.10'
+       LOCAL_SERVER= '192.168.100.116'
+        // LOCAL_SERVER= '10.100.100.10'
 //       MODE = 'dev'
     }
     tools {
