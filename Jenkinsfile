@@ -68,7 +68,7 @@ pipeline {
                 }
             }
         }
-
+*/
         stage('Container Build') {
             steps {
                 dir('microservicio-service/'){
@@ -79,7 +79,7 @@ pipeline {
                 }
             }
         }
-*/
+
 
         stage('Zuul') {
             steps {
