@@ -57,7 +57,7 @@ pipeline {
         }
 */
 
-
+/* esta OK 
         stage('Database') {
             steps {
                 dir('liquibase/'){
@@ -78,7 +78,7 @@ pipeline {
                 }
             }
         }
-
+*/
 
         stage('Zuul') {
             steps {
@@ -143,7 +143,7 @@ pipeline {
 */
 
 
-
+/*
         stage('Testing') {
             steps {
                 dir('Cypress/') {
@@ -157,7 +157,7 @@ pipeline {
                 }
             }
         }
-
+*/
 
 
 /*
