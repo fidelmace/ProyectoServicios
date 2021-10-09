@@ -102,10 +102,12 @@ pipeline {
 
 
         stage('Zuul') {
-            anyOf {
-                changeset "*ZuulBase/**"
-                expression { currentBuild.previousBuild.result != "SUCCESS"}
-            }
+             when {
+                anyOf {
+                    changeset "*ZuulBase/**"
+                    expression { currentBuild.previousBuild.result != "SUCCESS"}
+                }
+             }
             steps {
                 dir('ZuulBase/'){
                     sh 'mvn clean package'
@@ -119,10 +121,12 @@ pipeline {
             }
         }
         stage('Eureka') {
-            anyOf {
-                changeset "*EurekaBase/**"
-                expression { currentBuild.previousBuild.result != "SUCCESS"}
-            }
+             when {
+                anyOf {
+                    changeset "*EurekaBase/**"
+                    expression { currentBuild.previousBuild.result != "SUCCESS"}
+                }
+             }
             steps {
                 dir('EurekaBase/'){
                     sh 'mvn clean package'
