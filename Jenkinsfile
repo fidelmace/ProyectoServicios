@@ -48,8 +48,8 @@ pipeline {
                         echo 'Execute Maven and Analizing with SonarServer'
                         withSonarQubeEnv('SonarServer') {
                             sh "mvn clean package \
-                                -Dsonar.projectKey=21_MyCompany_Microservice \
-                                -Dsonar.projectName=21_MyCompany_Microservice \
+                                -Dsonar.projectKey=21_MyCompany_Microservice-two \
+                                -Dsonar.projectName=21_MyCompany_Microservice-two \
                                 -Dsonar.sources=src/main \
                                 -Dsonar.coverage.exclusions=**/*TO.java,**/*DO.java,**/curso/web/**/*,**/curso/persistence/**/*,**/curso/commons/**/*,**/curso/model/**/* \
                                 -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml \
@@ -224,11 +224,11 @@ pipeline {
         stage('Container Run micro2') {
             steps {
             //Agregamos el segundo microservicio
-                sh 'docker stop microservicio-two-one || true'  // valida que el microservicio-one exista  y No truene cuando no exista
-                sh 'docker run -d --rm --name microservicio-one -e SPRING_PROFILES_ACTIVE=qa  microservicio-service-two'
+                sh 'docker stop microservicio-two || true'  // valida que el microservicio-one exista  y No truene cuando no exista
+                sh 'docker run -d --rm --name microservicio-two -e SPRING_PROFILES_ACTIVE=qa  microservicio-service-two'
                 // con la linea de abajo se va a crear 2 replicas 
-                sh 'docker stop microservicio-two-one-two || true'
-                sh 'docker run -d --rm --name microservicio-one-two -e SPRING_PROFILES_ACTIVE=qa  microservicio-service-two'
+                sh 'docker stop microservicio-two-two || true'
+                sh 'docker run -d --rm --name microservicio-two-two -e SPRING_PROFILES_ACTIVE=qa  microservicio-service-two'
             }
         }
 
