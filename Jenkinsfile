@@ -218,17 +218,19 @@ pipeline {
 
                 //sh 'docker run -d --rm --name microservicio-one -e SPRING_PROFILES_ACTIVE=qa -p 8090:8090 ${LOCAL_SERVER}:8083/repository/docker-private/microservicio_nexus:dev'
                 //sh 'docker run -d --rm --name microservicio-one -e SPRING_PROFILES_ACTIVE=dev -p 8090:8090 ${LOCAL_SERVER}:8083/repository/docker-private/microservicio_nexus:dev'
+            }
+        }
 
-                //Agregamos el segundo microservicio
+        stage('Container Run micro2') {
+            steps {
+            //Agregamos el segundo microservicio
                 sh 'docker stop microservicio-two-one || true'  // valida que el microservicio-one exista  y No truene cuando no exista
                 sh 'docker run -d --rm --name microservicio-one -e SPRING_PROFILES_ACTIVE=qa  microservicio-service-two'
                 // con la linea de abajo se va a crear 2 replicas 
                 sh 'docker stop microservicio-two-one-two || true'
                 sh 'docker run -d --rm --name microservicio-one-two -e SPRING_PROFILES_ACTIVE=qa  microservicio-service-two'
-
             }
         }
-
 
 /*
         stage('Container Run') {
