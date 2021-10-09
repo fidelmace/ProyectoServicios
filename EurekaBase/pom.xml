@@ -19,6 +19,8 @@
         <spring-cloud.version>Greenwich.SR1</spring-cloud.version>
         <jaxb-core>2.3.0.1</jaxb-core>
         <jaxb-api>2.3.1</jaxb-api>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
     </properties>
 
     <dependencies>

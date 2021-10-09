@@ -122,8 +122,12 @@ pipeline {
        stage('Container Run') {
             steps {
                 sh 'docker stop microservicio-one || true'  // valida que el microservicio-one exista  y No truene cuando no exista
-                //sh 'docker run -d --rm --name microservicio-one -p 7000:7000 microservicio-service'
+                //Con la linea de abajo levantas solo una replica 
                 sh 'docker run -d --rm --name microservicio-one -e SPRING_PROFILES_ACTIVE=qa -p 8090:8090 microservicio-service'
+                // con la linea de abajo se va a crear 2 replicas 
+                sh 'docker stop microservicio-one-two || true'
+                sh 'docker run -d --rm --name microservicio-one-two -e SPRING_PROFILES_ACTIVE=qa -p 8093:8090 microservicio-service'
+
                 //sh 'docker run -d --rm --name microservicio-one -e SPRING_PROFILES_ACTIVE=qa -p 8090:8090 ${LOCAL_SERVER}:8083/repository/docker-private/microservicio_nexus:dev'
                 //sh 'docker run -d --rm --name microservicio-one -e SPRING_PROFILES_ACTIVE=dev -p 8090:8090 ${LOCAL_SERVER}:8083/repository/docker-private/microservicio_nexus:dev'
 
