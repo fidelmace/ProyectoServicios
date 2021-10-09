@@ -12,6 +12,12 @@ pipeline {
     }
     stages {
         stage('Build and Analize') {
+            when {
+                anyOf {
+                    changeset "*microservicio-service/**"
+                    expression { currentBuild.previousBuild.result != "SUCCESS"}
+                }
+            }
             steps {
                 dir('microservicio-service/'){
                     echo 'Execute Maven and Analizing with SonarServer'
@@ -60,6 +66,13 @@ pipeline {
 
 /* esta OK 
         stage('Database') {
+            when {
+                anyOf {
+                    changeset "*liquibase/**"
+                    expression { currentBuild.previousBuild.result != "SUCCESS"}
+                }
+            }
+
             steps {
                 dir('liquibase/'){
                     sh '/opt/liquibase/liquibase --version'
@@ -70,6 +83,13 @@ pipeline {
         }
 */
         stage('Container Build') {
+            when {
+                anyOf {
+                    changeset "*microservicio-service/**"
+                    expression { currentBuild.previousBuild.result != "SUCCESS"}
+                }
+            }
+
             steps {
                 dir('microservicio-service/'){
                     withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'dockerhub_id', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
@@ -82,6 +102,10 @@ pipeline {
 
 
         stage('Zuul') {
+            anyOf {
+                changeset "*ZuulBase/**"
+                expression { currentBuild.previousBuild.result != "SUCCESS"}
+            }
             steps {
                 dir('ZuulBase/'){
                     sh 'mvn clean package'
@@ -95,6 +119,10 @@ pipeline {
             }
         }
         stage('Eureka') {
+            anyOf {
+                changeset "*EurekaBase/**"
+                expression { currentBuild.previousBuild.result != "SUCCESS"}
+            }
             steps {
                 dir('EurekaBase/'){
                     sh 'mvn clean package'
@@ -120,6 +148,12 @@ pipeline {
 */
 
        stage('Container Run') {
+            when {
+                anyOf {
+                    changeset "*microservicio-service/**"
+                    expression { currentBuild.previousBuild.result != "SUCCESS"}
+                }
+            }         
             steps {
                 sh 'docker stop microservicio-one || true'  // valida que el microservicio-one exista  y No truene cuando no exista
                 //Con la linea de abajo levantas solo una replica 
