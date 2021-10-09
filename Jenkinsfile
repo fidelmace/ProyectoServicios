@@ -22,7 +22,7 @@ pipeline {
                 dir('microservicio-service/'){
                     echo 'Execute Maven and Analizing with SonarServer'
                     withSonarQubeEnv('SonarServer') {
-                         sh "mvn clean package \
+                         sh "mvn clean package -DskipTest \
                             -Dsonar.projectKey=21_MyCompany_Microservice \
                             -Dsonar.projectName=21_MyCompany_Microservice \
                             -Dsonar.sources=src/main \
