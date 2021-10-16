@@ -162,11 +162,11 @@
                 </executions>
                 <configuration>
                 <!--
-                    <cveUrlModified>http://10.100.100.10/nvdcve-1.1-modified.json.gz</cveUrlModified>
-                    <cveUrlBase>http://10.100.100.10/nvdcve-1.1-%d.json.gz</cveUrlBase>
+                    <cveUrlModified>http://192.168.100.116/nvdcve-1.1-modified.json.gz</cveUrlModified>
+                    <cveUrlBase>http://192.168.100.116/nvdcve-1.1-%d.json.gz</cveUrlBase>
                 -->
-                    <cveUrlModified>http://10.100.100.10/nvdcve-1.1-modified.json.gz</cveUrlModified>
-                    <cveUrlBase>http://10.100.100.10/nvdcve-1.1-%d.json.gz</cveUrlBase>
+                    <cveUrlModified>http://192.168.100.116/nvdcve-1.1-modified.json.gz</cveUrlModified>
+                    <cveUrlBase>http://192.168.100.116/nvdcve-1.1-%d.json.gz</cveUrlBase>
                     <formats>
                         <format>html</format>
                         <format>json</format>
