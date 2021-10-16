@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
        GIT_SSL_NO_VERIFY=true
-       LOCAL_SERVER= '192.168.100.116'
+       LOCAL_SERVER= '10.100.100.10'
         // LOCAL_SERVER= '10.100.100.10'
 //       MODE = 'dev'
     }
@@ -61,7 +61,7 @@ pipeline {
                 }
         }
 // Se crea conexión para que SONAR nos avise del resultado en caso de que no pase la compilación, se tiene que indicar pasos a seguir 
-//http://192.168.100.116:9000/ local sonaque
+//http://10.100.100.10:9000/ local sonaque
 
 /*
         stage ('Quality Gate') {
