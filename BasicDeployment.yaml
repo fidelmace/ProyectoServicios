@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment  #tipo
+metadata:
+  name: hello-world-dep #nombre al deployment
+spec: #especificacion del deployment
+  replicas: 4
+  selector:
+    matchLabels: 
+      app: hello-world-pod
+
+  template:  #AQUI YA ES EL POD
+    metadata:
+      labels: #Llave-Valor
+        app: hello-world-pod  #Nombre del POD
+    spec:
+      containers: 
+      - name: hello-world-container
+        image: fidelmace/microservicio-one:v1
+        ports: 
+        - containerPort: 8091
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-world
+spec:
+  selector:
+    app: hello-world-pod
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 8091
+  type: LoadBalancer
