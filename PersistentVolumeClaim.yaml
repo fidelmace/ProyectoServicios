@@ -1,0 +1,11 @@
+apiVersion: v1 #Reclamar espacio para el POD
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-local-data
+spec:
+  storageClassName: manual #Tipo de almacenamiento, manual, dinamica
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 10Gi

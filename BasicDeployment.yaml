@@ -3,7 +3,13 @@ kind: Deployment  #tipo
 metadata:
   name: hello-world-dep #nombre al deployment
 spec: #especificacion del deployment
-  replicas: 4
+  replicas: 1
+  minReadySeconds: 15 #si no han marcado en 15 seg el readinessProbe truena la replicaSet
+  strategy:
+    type: RollingUpdate 
+    rollingUpdate:
+      maxUnavailable: 25% #almenos  una 4ta parte debe estar NO disponible y el 75% estara disponoble  practica estandar 
+      maxSurge: 25%  #No superes mas del 25%, lo maximo que voy a crecer 
   selector:
     matchLabels: 
       app: hello-world-pod
@@ -18,11 +24,28 @@ spec: #especificacion del deployment
         image: fidelmace/microservicio-one:v1
         ports: 
         - containerPort: 8091
+        readinessProbe: #Prueba de vida
+          httpGet:
+            path: /microservicio/ping
+            port: 8091
+        env:
+        - name: DATABASE_SERVER # define variables de entorno
+          value: localhost.sql # una url de un servicio de BD 
+        - name: APP1_USERNAME # define  otra variables de entorno
+          valueFrom:
+            secretKeyRef:
+              name: app1
+              key: USERNAME
+        - name: APP1_PASSWORD # define  otra variables de entorno
+          valueFrom:
+            secretKeyRef:
+              name: app1
+              key: PASSWORD
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: hello-world
+  name: hello-world #hello-world-svc
 spec:
   selector:
     app: hello-world-pod
@@ -30,4 +53,4 @@ spec:
   - port: 80
     protocol: TCP
     targetPort: 8091
-  type: LoadBalancer
+  type: ClusterIP #ClusterIP  NodePort LoadBalancer
